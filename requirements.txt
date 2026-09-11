@@ -1,0 +1,18 @@
+# Core (needed to run the pure-Python parts, and all tests except the
+# opt-in HF/Lean integration tests):
+PyYAML>=6,<7
+pytest>=8,<9
+
+# Model backend (needed for `--backend hf` / real evaluation runs):
+transformers>=4.45,<5
+torch>=2.2,<3
+accelerate>=0.34,<2
+
+# Dataset loading (needed for real train/valid/test splits; not needed for
+# --split sample):
+datasets>=2.20,<4
+huggingface_hub>=0.24,<1
+
+# NOTE: the Lean 4 toolchain itself (elan/lake/lean, plus a Mathlib-enabled
+# Lake project) is a separate, non-pip installation. See README.md "Colab /
+# environment setup" for the exact commands.
