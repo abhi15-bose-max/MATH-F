@@ -1,0 +1,15 @@
+name = "math_f_lean"
+defaultTargets = ["MathF"]
+
+# Mathlib is required so that "import Mathlib" resolves for every
+# generated candidate proof. No revision is pinned here: run
+# `lake update` once (with network access) to resolve the Mathlib
+# commit compatible with the `lean-toolchain` pinned in this
+# directory, then commit the resulting lake-manifest.json so future
+# clones are fully reproducible (see lean_project/README.md).
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+
+[[lean_lib]]
+name = "MathF"

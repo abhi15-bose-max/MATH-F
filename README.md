@@ -154,6 +154,24 @@ against real Lean** — see the Colab notebook, which installs Lean +
 Mathlib (needs network) and re-runs the benchmark for real as its
 first and most important job.
 
+**Update, first real Colab run:** the toolchain install and
+`LeanVerifier`'s subprocess plumbing worked correctly against a real
+Lean install (no `FileNotFoundError`, clean `TimeoutExpired` handling)
+— but the original `timeout_seconds=30/60` defaults were too tight and
+produced `TIMEOUT` results. Root cause: every verification call spawns
+a *fresh* `lean` process, and `import Mathlib` forces that process to
+deserialize the entire Mathlib environment from disk before it looks
+at the goal — this routinely takes well over a minute on shared/cloud
+disks even with `lake exe cache get` already run. Defaults have been
+raised to `180s` (`configs/default.yaml`, `ExperimentConfig`,
+`LeanVerifier`). If you still see `TIMEOUT`, first confirm `lake exe
+cache get` actually downloaded prebuilt files (rather than falling
+back to a from-source Mathlib build, which takes hours). The durable
+fix — not yet implemented — is to stop paying Mathlib's cold-import
+cost on every single candidate by reusing one warm Lean process (e.g.
+via `leanprover-community/repl`) instead of shelling out fresh each
+time; see "What is planned" below.
+
 ---
 
 ## Repository structure
@@ -349,6 +367,12 @@ notebook) before treating these numbers as meaningful.**
   `src/mathf/core/`.
 - Committing `lean_project/lake-manifest.json` once `lake update` has
   been run with network access, for full reproducibility.
+- **Reusing a warm Lean process across candidates** (e.g. via
+  `leanprover-community/repl`) instead of spawning `lean` fresh per
+  candidate. This is the real fix for the slow-cold-Mathlib-import
+  issue noted above, and matters increasingly as the benchmark or
+  attempt budget grows — right now every single attempt re-pays the
+  full Mathlib import cost.
 
 ## Scientific positioning
 

@@ -1,0 +1,26 @@
+# MATH-F V1 default experiment configuration.
+# Override any field on the command line, e.g.:
+#   python experiments/run_v1.py --config configs/default.yaml --max-attempts 8
+
+dataset_path: datasets/v1/problems.json
+dataset_version: v1
+
+generator_name: fixed_tactic_search   # non-AI: fixed portfolio of closing tactics
+verifier_name: lean                   # "lean" (real, requires Lean+Mathlib) or "mock" (offline test double)
+
+max_attempts: 5
+# NOTE: this is dominated by Mathlib's cold-import cost, not proof complexity.
+# Every verification call spawns a fresh `lean` process, and `import Mathlib`
+# forces that process to deserialize the entire Mathlib environment from disk
+# before it even looks at the goal. Empirically (first real Colab run) this
+# can take well over 60s on shared/cloud disks even with `lake exe cache get`
+# already run. 30s (or even 60s) is too tight; 180s is a safer default until
+# the verifier is upgraded to reuse a warm Lean process (see README "Known
+# Limitations" / roadmap).
+timeout_seconds: 180
+
+output_dir: trajectories
+results_dir: results
+
+lean_project_dir: lean_project
+random_seed: 0
