@@ -1,6 +1,0 @@
-# Core (framework only needs this)
-PyYAML>=6.0
-
-# Optional, for running the test suite with pytest instead of
-# `python -m unittest` (both work; see README.md "Testing").
-pytest>=7.0
