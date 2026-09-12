@@ -9,7 +9,7 @@ generator_name: fixed_tactic_search   # non-AI: fixed portfolio of closing tacti
 verifier_name: lean                   # "lean" (real, requires Lean+Mathlib) or "mock" (offline test double)
 
 max_attempts: 5
-timeout_seconds: 30
+timeout_seconds: 180
 
 output_dir: trajectories
 results_dir: results
