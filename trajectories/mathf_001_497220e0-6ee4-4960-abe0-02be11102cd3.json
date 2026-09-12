@@ -1,0 +1,49 @@
+{
+  "trajectory_id": "497220e0-6ee4-4960-abe0-02be11102cd3",
+  "problem_id": "mathf_001",
+  "generator": "fixed_tactic_search",
+  "verifier": "mock_lean_v0",
+  "created_at": 1789189157.2393548,
+  "configuration": {
+    "max_attempts": 5,
+    "timeout_seconds": 30
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "candidate": {
+        "problem_id": "mathf_001",
+        "generator": "fixed_tactic_search",
+        "attempt": 1,
+        "proof": "by decide",
+        "method": "fixed_tactic_portfolio",
+        "search_time_seconds": 5.9604644775390625e-06,
+        "search_parameters": {
+          "tactic": "decide",
+          "portfolio_index": 0
+        },
+        "metadata": {
+          "exhausted": false
+        }
+      },
+      "verification": {
+        "verified": true,
+        "status": "VERIFIED",
+        "errors": [],
+        "runtime_seconds": 0.01,
+        "raw_stdout": "",
+        "raw_stderr": "",
+        "exit_code": null,
+        "verifier": "mock_lean_v0",
+        "verifier_metadata": {
+          "mock": true
+        }
+      },
+      "duplicate": false,
+      "duplicate_of_attempt": null
+    }
+  ],
+  "final_status": "VERIFIED",
+  "attempts_used": 1,
+  "solved": true
+}

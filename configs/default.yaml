@@ -1,0 +1,18 @@
+# MATH-F V1 default experiment configuration.
+# Override any field on the command line, e.g.:
+#   python experiments/run_v1.py --config configs/default.yaml --max-attempts 8
+
+dataset_path: datasets/v1/problems.json
+dataset_version: v1
+
+generator_name: fixed_tactic_search   # non-AI: fixed portfolio of closing tactics
+verifier_name: lean                   # "lean" (real, requires Lean+Mathlib) or "mock" (offline test double)
+
+max_attempts: 5
+timeout_seconds: 30
+
+output_dir: trajectories
+results_dir: results
+
+lean_project_dir: lean_project
+random_seed: 0
